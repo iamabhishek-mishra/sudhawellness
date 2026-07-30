@@ -1,0 +1,32 @@
+{
+  "name": "sudha-wellness-webinar-backend",
+  "version": "2.0.0",
+  "description": "Backend for Sudha Wellness Webinar — MySQL + PhonePe + WhatsApp + Email",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "pm2:start": "pm2 start ecosystem.config.js --env production",
+    "pm2:restart": "pm2 restart sudha-wellness",
+    "pm2:logs": "pm2 logs sudha-wellness",
+    "pm2:stop": "pm2 stop sudha-wellness"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.6.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.23.1",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

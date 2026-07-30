@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register for Webinar – Sudha Wellness</title>
+  <meta name="description" content="Register for the Sudha Wellness holistic wellness webinar. Free seat + optional VIP upgrade, Google Meet link by email and WhatsApp, and account login access." />
+  <meta name="theme-color" content="#2d7a4f" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+  <div data-include="header.html"></div>
+
+  <!-- PAGE HEADER -->
+  <section class="hero" style="min-height:auto;padding-top:120px;padding-bottom:40px;">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge">🔴 LIVE WEBINAR</span>
+      <h1>Reserve Your Seat for the<br /><span class="highlight">Holistic Wellness Webinar</span></h1>
+      <p class="hero-sub">Fill in your details below to receive the Google Meet link and a temporary dashboard password by email. Your WhatsApp number will also receive the webinar link when WhatsApp is configured.</p>
+      <div class="hero-meta">
+        <div class="meta-item">📅 <strong>Tuesday, 21st July 2026</strong></div>
+        <div class="meta-item">⏰ <strong>7:00 PM – 8:30 PM UTC</strong></div>
+        <div class="meta-item">💻 <strong>Live on Google Meet</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION SECTION (same form as homepage) -->
+  <section class="register" id="register">
+    <div class="container">
+      <div class="section-tag">Limited Seats</div>
+      <h2>Register for the Webinar</h2>
+      <p class="section-sub">Seats are limited. Secure your spot now and get the Meet link instantly by email and WhatsApp!</p>
+
+      <div class="register-wrapper">
+        <div class="register-info">
+          <h3>What you get:</h3>
+          <ul>
+            <li>✅ Live 2-hour wellness session</li>
+            <li>✅ Google Meet link via email and WhatsApp instantly</li>
+            <li>✅ Free wellness workbook (₹499 value)</li>
+            <li>✅ 7-day detox meal plan</li>
+            <li>✅ Recording access for 7 days</li>
+            <li>✅ Certificate of participation</li>
+          </ul>
+          <div class="price-box">
+            <span class="old-price">₹999</span>
+            <span class="new-price">FREE</span>
+            <span class="price-note">Limited time offer</span>
+          </div>
+        </div>
+
+        <div class="register-form-box">
+          <form id="registerForm" onsubmit="handleRegistration(event)">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="fullName" placeholder="Enter your full name" required />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number *</label>
+              <div class="phone-input">
+                <span class="country-code">+91</span>
+                <input type="tel" id="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" id="email" placeholder="your@email.com" required />
+            </div>
+
+            <p class="form-note" style="margin-top:-4px;text-align:left;">
+              We will create your dashboard login automatically and email you a temporary password with the Meet link.
+            </p>
+
+            <div class="form-group">
+              <label>Your Primary Health Goal</label>
+              <select id="goal">
+                <option value="">Select your goal</option>
+                <option value="weight">Weight Management</option>
+                <option value="stress">Stress & Anxiety</option>
+                <option value="gut">Gut Health Issues</option>
+                <option value="energy">Low Energy & Fatigue</option>
+                <option value="sleep">Sleep Problems</option>
+                <option value="general">General Wellness</option>
+              </select>
+            </div>
+
+            <!-- Payment Selection -->
+            <div class="payment-section">
+              <h4>Choose Registration Type</h4>
+              <div class="payment-options">
+                <label class="payment-option active" id="opt-free">
+                  <input type="radio" name="regType" value="free" checked onchange="togglePayment('free')" />
+                  <div class="opt-content">
+                    <span class="opt-icon">🎁</span>
+                    <div>
+                      <strong>Free Registration</strong>
+                      <small>Basic access + Meet link</small>
+                    </div>
+                    <span class="opt-price">FREE</span>
+                  </div>
+                </label>
+                <label class="payment-option" id="opt-paid">
+                  <input type="radio" name="regType" value="paid" onchange="togglePayment('paid')" />
+                  <div class="opt-content">
+                    <span class="opt-icon">⭐</span>
+                    <div>
+                      <strong>VIP Registration</strong>
+                      <small>All access + 1:1 Q&A slot + Recordings</small>
+                    </div>
+                    <span class="opt-price">₹99</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Payment Method (shown for paid) -->
+            <div class="payment-method-section" id="paymentMethodSection" style="display:none;">
+              <h4>Secure Payment</h4>
+              <div class="payment-methods">
+                <button type="button" class="pay-btn phonepe-btn" onclick="payWithPhonePe()">
+                  <span>PhonePe</span>
+                  Pay ₹99 with PhonePe Gateway
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Register & Get Meet Link
+            </button>
+            <p class="form-note">Meet link and temporary login password will be sent to your email within 2 minutes</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-icon">🎉</div>
+      <h3>You're Registered!</h3>
+      <p id="modalMessage">Thank you for registering! Your Google Meet link has been sent to your email and WhatsApp number.</p>
+      <div class="modal-details" id="modalDetails"></div>
+      <button onclick="closeModal()" class="btn-primary">Done</button>
+    </div>
+  </div>
+
+  <div data-include="footer.html"></div>
+
+  <script src="layout.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
